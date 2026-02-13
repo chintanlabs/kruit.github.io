@@ -1,9 +1,9 @@
 export function App() {
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="font-medium">Hello World</div>
-    </div>
-  )
+    return (
+        <div className="h-full w-full flex items-center justify-center">
+            <h1>Krut.ai</h1>
+        </div>
+    );
 }
 
-export default App
+export default App;
