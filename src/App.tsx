@@ -1,7 +1,25 @@
+import Navigation from './components/Navigation';
+import Hero from './components/Hero';
+import Problem from './components/Problem';
+import Solution from './components/Solution';
+import ROI from './components/ROI';
+import HowItWorks from './components/HowItWorks';
+import Market from './components/Market';
+import CTA from './components/CTA';
+import Footer from './components/Footer';
+
 export function App() {
     return (
-        <div className="h-full w-full flex items-center justify-center">
-            <h1>Krut.ai</h1>
+        <div className="min-h-screen bg-white">
+            <Navigation />
+            <Hero />
+            <Problem />
+            <Solution />
+            <ROI />
+            <HowItWorks />
+            <Market />
+            <CTA />
+            <Footer />
         </div>
     );
 }
