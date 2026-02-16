@@ -3,23 +3,23 @@ import { Card } from '../components/ui/card';
 
 export default function ROI() {
     return (
-        <section id="roi" className="py-20 px-6 bg-white">
+        <section id="roi" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-white">
             <div className="max-w-6xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-10 sm:mb-12 md:mb-16"
                 >
-                    <div className="inline-block mb-4">
-                        <span className="text-primary font-bold text-sm tracking-wider uppercase">RETURN ON INVESTMENT</span>
+                    <div className="inline-block mb-3 sm:mb-4">
+                        <span className="text-primary font-bold text-xs sm:text-sm tracking-wider uppercase">RETURN ON INVESTMENT</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Measurable impact from day one</h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">kruit.ai delivers faster hiring, better signal, and stronger long-term retention.</p>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">Measurable impact from day one</h2>
+                    <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">kruit.ai delivers faster hiring, better signal, and stronger long-term retention.</p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                     {[
                         {
                             value: '40–60%',
@@ -47,11 +47,12 @@ export default function ROI() {
                             transition={{ duration: 0.6, delay: item.delay }}
                             viewport={{ once: true }}
                             whileHover={{ y: -5 }}
+                            className={index === 2 ? 'sm:col-span-2 lg:col-span-1' : ''}
                         >
-                            <Card className="p-8 h-full hover:shadow-xl transition-all duration-300 border-gray-200">
-                                <div className="text-5xl font-bold text-primary mb-4">{item.value}</div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                                <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                            <Card className="p-6 sm:p-8 h-full hover:shadow-xl transition-all duration-300 border-gray-200">
+                                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-3 sm:mb-4">{item.value}</div>
+                                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{item.title}</h3>
+                                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{item.description}</p>
                             </Card>
                         </motion.div>
                     ))}

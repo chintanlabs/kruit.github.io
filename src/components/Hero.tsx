@@ -5,16 +5,16 @@ import { Card } from '../components/ui/card';
 
 export default function Hero() {
     return (
-        <main className="hero bg-cover md:bg-contain pt-32 pb-20 px-6 bg-linear-to-b from-gray-50 to-white">
+        <main className="hero bg-cover bg-center pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-gray-50 to-white">
             <div className="max-w-5xl mx-auto text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="inline-block mb-6"
+                    className="inline-block mb-4 sm:mb-6"
                 >
-                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-primary text-sm font-medium">
-                        <Zap className="w-4 h-4" />
+                    <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-blue-50 text-primary text-xs sm:text-sm font-medium">
+                        <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         AI-Native Hiring Infrastructure
                     </span>
                 </motion.div>
@@ -23,9 +23,9 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
-                    className="text-5xl md:text-[64px] font-extrabold text-gray-900 mb-6 leading-tight"
+                    className="text-[38px] sm:text-4xl md:text-5xl lg:text-[64px] font-extrabold text-gray-900 mb-4 sm:mb-6 leading-tight px-2"
                 >
-                    Hire engineers for <br />
+                    Hire engineers for <br className="hidden sm:block" />
                     <span className="text-gray-900">judgment, not memorization</span>
                 </motion.h1>
 
@@ -33,7 +33,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
-                    className="text-lg text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed"
+                    className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed px-2"
                 >
                     The first recruiting platform built for AI-first engineering teams. Evaluate real-world reasoning, reduce time-to-hire by 60%, and eliminate false positives.
                 </motion.p>
@@ -42,15 +42,16 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.8 }}
-                    className="flex flex-wrap items-center justify-center gap-4 mb-15"
+                    className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 px-4"
                 >
                     <motion.div
                         variants={{ rest: {}, hover: {} }}
                         initial="rest"
                         whileHover="hover"
                         whileTap={{ scale: 0.98 }}
+                        className="w-full sm:w-auto"
                     >
-                        <Button size="xxl" className="flex items-center">
+                        <Button size="xxl" className="flex items-center justify-center w-full sm:w-auto">
                             Schedule a Demo
                             <motion.span
                                 className="ml-2 inline-flex"
@@ -68,8 +69,8 @@ export default function Hero() {
                         </Button>
                     </motion.div>
 
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button size="xxl" variant="primaryOutline">
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
+                        <Button size="xxl" variant="primaryOutline" className="w-full sm:w-auto">
                             See How It Works
                         </Button>
                     </motion.div>
@@ -79,7 +80,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 1 }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-4"
                 >
                     {[
                         { icon: Zap, value: '60%', label: 'Faster hiring', delay: 0 },
@@ -92,11 +93,12 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 1.2 + stat.delay }}
                             whileHover={{ y: -5 }}
+                            className={index === 2 ? 'sm:col-span-2 md:col-span-1' : ''}
                         >
-                            <Card className="p-6 text-center border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
-                                <stat.icon className="w-8 h-8 mx-auto mb-4 text-primary" />
-                                <div className="text-5xl font-bold text-primary">{stat.value}</div>
-                                <div className="text-gray-600 font-medium">{stat.label}</div>
+                            <Card className="p-4 sm:p-6 text-center border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+                                <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-3 sm:mb-4 text-primary" />
+                                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary">{stat.value}</div>
+                                <div className="text-sm sm:text-base text-gray-600 font-medium">{stat.label}</div>
                             </Card>
                         </motion.div>
                     ))}
