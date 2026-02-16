@@ -4,7 +4,6 @@ import Problem from './components/Problem';
 import Solution from './components/Solution';
 import ROI from './components/ROI';
 import HowItWorks from './components/HowItWorks';
-import Market from './components/Market';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 
@@ -17,7 +16,6 @@ export function App() {
             <Solution />
             <ROI />
             <HowItWorks />
-            <Market />
             <CTA />
             <Footer />
         </div>
