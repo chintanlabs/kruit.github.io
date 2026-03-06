@@ -7,6 +7,10 @@ WORKDIR /app
 COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
 RUN npm ci --frozen-lockfile
 
+# Build-time variable injected by the deploy script
+ARG VITE_CLOUD_RUN_URL
+ENV VITE_CLOUD_RUN_URL=${VITE_CLOUD_RUN_URL}
+
 # Copy source and build
 # Override vite base to "/" so the app works at the Cloud Run root URL
 COPY . .

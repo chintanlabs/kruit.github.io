@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import ContactUs from './pages/ContactUs';
 
 function Home() {
     return (
@@ -34,6 +35,7 @@ export function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/contact" element={<ContactUs />} />
             </Routes>
         </BrowserRouter>
     );

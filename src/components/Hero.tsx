@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Zap, Target, Calendar, ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '../components/ui/tooltip';
 import { Card } from '../components/ui/card';
 
 export default function Hero() {
+    const navigate = useNavigate();
     return (
         <main className="hero bg-cover bg-center pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-gray-50 to-white">
             <div className="max-w-5xl mx-auto text-center">
@@ -35,7 +38,7 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.6 }}
                     className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed px-2"
                 >
-                    The first recruiting platform built for AI-first engineering teams. Evaluate real-world reasoning, reduce time-to-hire by 60%, and eliminate false positives.
+                    An unique recruitment platofrm built for AI-first engineering teams. Evaluate real-world reasoning, reduce time-to-hire by 60%, and eliminate false positives.
                 </motion.p>
 
                 <motion.div
@@ -51,7 +54,7 @@ export default function Hero() {
                         whileTap={{ scale: 0.98 }}
                         className="w-full sm:w-auto"
                     >
-                        <Button size="xxl" className="flex items-center justify-center w-full sm:w-auto">
+                        <Button size="xxl" className="flex items-center justify-center w-full sm:w-auto" onClick={() => navigate('/contact')}>
                             Schedule a Demo
                             <motion.span
                                 className="ml-2 inline-flex"
@@ -70,9 +73,20 @@ export default function Hero() {
                     </motion.div>
 
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
-                        <Button size="xxl" variant="primaryOutline" className="w-full sm:w-auto">
-                            See How It Works
-                        </Button>
+                        <TooltipProvider delayDuration={100}>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <div className="w-full sm:w-auto">
+                                        <Button size="xxl" variant="primaryOutline" className="w-full sm:w-auto">
+                                            Structured Interviews
+                                        </Button>
+                                    </div>
+                                </TooltipTrigger>
+                                <TooltipContent sideOffset={6}>
+                                    Feature coming up
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
                     </motion.div>
                 </motion.div>
 
