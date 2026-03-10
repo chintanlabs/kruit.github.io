@@ -35,7 +35,7 @@ warn()    { echo -e "${YELLOW}  ⚠ $*${NC}"; }
 die()     { echo -e "${RED}  ✗ $*${NC}" >&2; exit 1; }
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-PROJECT_ID="${PROJECT_ID:-kruit-487410}"           # override with: export PROJECT_ID=xxx
+PROJECT_ID="${PROJECT_ID:-sandbox-487605}"           # override with: export PROJECT_ID=xxx
 REGION="${REGION:-us-central1}"
 SERVICE_NAME="kruit-contact"
 IMAGE_REPO="contact-service"
@@ -51,8 +51,12 @@ SECRET_ORIGINS="kruit-contact-allowed-origins"
 ENV_FILE="$(dirname "$0")/.env"
 [[ -f "$ENV_FILE" ]] || die ".env file not found at $ENV_FILE — copy .env.example and fill it in."
 
-# Source only the key=value pairs (skip comments and blanks)
-export $(grep -v '^\s*#' "$ENV_FILE" | grep -v '^\s*$' | xargs)
+# Source the .env safely, preserving quoted values and spaces
+# Use allexport so variables become exported into the environment
+set -o allexport
+# shellcheck disable=SC1090
+. "$ENV_FILE"
+set +o allexport
 
 [[ -n "${GMAIL_USER:-}"         ]] || die "GMAIL_USER is empty in .env"
 [[ -n "${GMAIL_APP_PASSWORD:-}" ]] || die "GMAIL_APP_PASSWORD is empty in .env"

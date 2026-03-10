@@ -1,4 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from './app/store';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Problem from './components/Problem';
@@ -11,6 +14,9 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import ContactUs from './pages/ContactUs';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import { hydrateAuth, fetchCurrentUser } from './features/auth/authSlice';
+import { tokenStorage } from './services/auth.service';
 
 function Home() {
     return (
@@ -28,14 +34,34 @@ function Home() {
 }
 
 export function App() {
+    const dispatch = useDispatch<AppDispatch>();
+
+    useEffect(() => {
+        const token = tokenStorage.getAccessToken();
+        if (token) {
+            dispatch(hydrateAuth());
+            dispatch(fetchCurrentUser());
+        }
+    }, [dispatch]);
+
     return (
         <BrowserRouter>
             <Routes>
+                {/* Public routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/contact" element={<ContactUs />} />
+
+                {/* Protected routes */}
+                <Route path="/dashboard" element={
+                    <ProtectedRoute>
+                        <Dashboard />
+                    </ProtectedRoute>
+                } />
+
+                {/* Catch-all */}
+                <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </BrowserRouter>
     );

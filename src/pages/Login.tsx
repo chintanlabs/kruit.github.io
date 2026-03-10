@@ -1,14 +1,41 @@
 import { motion, type Variants } from 'framer-motion';
 import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '../components/ui/button';
-import { Eye, EyeOff, ArrowRight, Mail, Lock } from 'lucide-react';
+import { Eye, EyeOff, ArrowRight, Mail, Lock, AlertCircle, X } from 'lucide-react';
 import loginIllustration from '../assets/login_illustration.png';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import {
+    loginUser,
+    forceLoginUser,
+    clearError,
+    clearActiveSessionConflict,
+} from '../features/auth/authSlice';
 
 export default function Login() {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { loading, error, activeSessionConflict } = useAppSelector((state) => state.auth);
+
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [focusedField, setFocusedField] = useState<string | null>(null);
+
+    const from = (location.state as { from?: { pathname: string } })?.from?.pathname || '/dashboard';
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const result = await dispatch(loginUser({ email, password }));
+        if (loginUser.fulfilled.match(result)) navigate(from, { replace: true });
+    };
+
+    const handleForceLogin = async () => {
+        if (!activeSessionConflict) return;
+        const result = await dispatch(forceLoginUser({ email, password, session_id: activeSessionConflict.sessionId }));
+        if (forceLoginUser.fulfilled.match(result)) navigate(from, { replace: true });
+    };
 
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
@@ -56,9 +83,44 @@ export default function Login() {
                         <p className="text-gray-500 text-sm">Sign in to your kruit.ai account</p>
                     </motion.div>
 
+                    {/* Active session conflict prompt */}
+                    {activeSessionConflict && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="mb-4 p-4 rounded-xl border border-amber-200 bg-amber-50 text-sm text-amber-800"
+                        >
+                            <p className="font-semibold mb-1">Active session detected</p>
+                            <p className="text-xs mb-3">You already have an active session on another device. Sign out of that session and continue here?</p>
+                            <div className="flex gap-2">
+                                <Button type="button" size="sm" onClick={handleForceLogin} disabled={loading} className="text-xs h-8 bg-amber-600 hover:bg-amber-700">
+                                    {loading ? 'Signing in…' : 'Yes, sign out other session'}
+                                </Button>
+                                <Button type="button" size="sm" variant="ghost" onClick={() => dispatch(clearActiveSessionConflict())} className="text-xs h-8">
+                                    Cancel
+                                </Button>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {/* Error banner */}
+                    {error && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="mb-2 flex items-start gap-2 p-3 rounded-xl border border-red-200 bg-red-50 text-sm text-red-700"
+                        >
+                            <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                            <span className="flex-1">{error}</span>
+                            <button type="button" onClick={() => dispatch(clearError())} className="shrink-0 hover:text-red-900">
+                                <X className="w-3.5 h-3.5" />
+                            </button>
+                        </motion.div>
+                    )}
+
                     <form
-                        onSubmit={(e) => e.preventDefault()}
-                        className="flex flex-col  gap-5"
+                        onSubmit={handleSubmit}
+                        className="flex flex-col gap-5"
                     >
                         {/* Email field */}
                         <motion.div variants={itemVariants} className="flex flex-col gap-1.5">
@@ -138,16 +200,21 @@ export default function Login() {
                                     type="submit"
                                     size="xl"
                                     className="w-full group"
+                                    disabled={loading}
                                 >
-                                    Sign In
-                                    <motion.span
-                                        className="ml-1 inline-flex"
-                                        initial={{ x: 0 }}
-                                        whileHover={{ x: 4 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                        <ArrowRight className="w-4 h-4" />
-                                    </motion.span>
+                                    {loading ? 'Signing in…' : (
+                                        <>
+                                            Sign In
+                                            <motion.span
+                                                className="ml-1 inline-flex"
+                                                initial={{ x: 0 }}
+                                                whileHover={{ x: 4 }}
+                                                transition={{ duration: 0.2 }}
+                                            >
+                                                <ArrowRight className="w-4 h-4" />
+                                            </motion.span>
+                                        </>
+                                    )}
                                 </Button>
                             </motion.div>
                         </motion.div>

@@ -7,12 +7,7 @@ WORKDIR /app
 COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
 RUN npm ci --frozen-lockfile
 
-# Build-time variable injected by the deploy script
-ARG VITE_CLOUD_RUN_URL
-ENV VITE_CLOUD_RUN_URL=${VITE_CLOUD_RUN_URL}
-
 # Copy source and build
-# Override vite base to "/" so the app works at the Cloud Run root URL
 COPY . .
 RUN npm run build -- --base=/
 
@@ -28,7 +23,14 @@ COPY nginx.conf /etc/nginx/conf.d/app.conf
 # Copy built assets from builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Copy and setup the entrypoint script for runtime env injection
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Cloud Run requires the container to listen on $PORT (default 8080)
 EXPOSE 8080
+
+# Use the entrypoint script to inject VITE_* env vars into window.__env__ at container startup
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD ["nginx", "-g", "daemon off;"]

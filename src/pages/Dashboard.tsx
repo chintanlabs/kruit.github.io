@@ -36,6 +36,10 @@ import {
     Clock,
     CheckCircle2,
 } from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { logoutUser } from '../features/auth/authSlice';
+import { tokenStorage } from '../services/auth.service';
+import { config } from '../config';
 
 const navMain = [
     { title: 'Overview', icon: LayoutDashboard, id: 'overview', badge: null },
@@ -47,15 +51,16 @@ const navMain = [
 
 const products = [
     {
-        id: 'ai-screening',
-        title: 'AI Candidate Screening',
-        description: 'Agentic screening that identifies high-signal talent early — no resume noise.',
+        id: 'resume-intelligence',
+        title: 'Resume Intelligence',
+        description: 'AI-powered resume parsing and candidate scoring — surface the best talent from every application.',
         icon: Search,
         color: 'from-blue-500 to-indigo-600',
         bg: 'bg-blue-50',
         iconColor: 'text-blue-600',
         badge: 'Most Used',
         stats: '2.4× faster',
+        external: true,
     },
     {
         id: 'ai-evaluation',
@@ -67,6 +72,7 @@ const products = [
         iconColor: 'text-violet-600',
         badge: 'New',
         stats: '50%+ precision',
+        external: false,
     },
     {
         id: 'structured-interviews',
@@ -78,6 +84,7 @@ const products = [
         iconColor: 'text-emerald-600',
         badge: null,
         stats: '1–2 rounds only',
+        external: false,
     },
     {
         id: 'candidate-intelligence',
@@ -89,6 +96,7 @@ const products = [
         iconColor: 'text-amber-600',
         badge: null,
         stats: 'Full signal',
+        external: false,
     },
 ];
 
@@ -111,6 +119,31 @@ const cardVariants: Variants = {
 export default function Dashboard() {
     const [activeNav, setActiveNav] = useState('overview');
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const { user } = useAppSelector((state) => state.auth);
+
+    const userInitials = user?.name
+        ? user.name.split(' ').map((n) => n[0]).join('').toUpperCase().slice(0, 2)
+        : (user?.email?.[0]?.toUpperCase() ?? '?');
+
+    const handleLogout = async () => {
+        await dispatch(logoutUser());
+        navigate('/login', { replace: true });
+    };
+
+    const handleProductLaunch = (productId: string, external: boolean) => {
+        if (!external) return; // Coming soon — not yet wired up
+        if (productId === 'resume-intelligence') {
+            const at = tokenStorage.getAccessToken();
+            const rt = tokenStorage.getRefreshToken();
+            if (at && rt) {
+                // Strip any trailing slash before appending the hash
+                const base = config.resumeVettingUrl.replace(/\/$/, '');
+                const url = `${base}/#at=${encodeURIComponent(at)}&rt=${encodeURIComponent(rt)}`;
+                window.open(url, '_blank', 'noopener,noreferrer');
+            }
+        }
+    };
 
     return (
         <SidebarProvider>
@@ -146,8 +179,8 @@ export default function Dashboard() {
                                                 onClick={() => setActiveNav(item.id)}
                                                 tooltip={item.title}
                                                 className={`gap-3 rounded-lg transition-all ${activeNav === item.id
-                                                        ? 'bg-primary/10 text-primary font-semibold'
-                                                        : 'text-gray-600 hover:bg-gray-100'
+                                                    ? 'bg-primary/10 text-primary font-semibold'
+                                                    : 'text-gray-600 hover:bg-gray-100'
                                                     }`}
                                             >
                                                 <item.icon className="w-4 h-4 shrink-0" />
@@ -199,7 +232,7 @@ export default function Dashboard() {
                             <SidebarMenuItem>
                                 <SidebarMenuButton
                                     tooltip="Log out"
-                                    onClick={() => navigate('/login')}
+                                    onClick={handleLogout}
                                     className="gap-3 text-gray-600 hover:bg-red-50 hover:text-red-600 rounded-lg"
                                 >
                                     <LogOut className="w-4 h-4" />
@@ -218,7 +251,7 @@ export default function Dashboard() {
                             <SidebarTrigger className="text-gray-500 hover:text-gray-800" />
                             <div className="hidden sm:block">
                                 <h1 className="text-base font-semibold text-gray-900">Dashboard</h1>
-                                <p className="text-xs text-gray-400">Welcome back — here's what's happening</p>
+                                <p className="text-xs text-gray-400">Welcome back{user?.name ? `, ${user.name}` : ''} — here's what's happening</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
@@ -227,7 +260,7 @@ export default function Dashboard() {
                                 <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full" />
                             </Button>
                             <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">
-                                JD
+                                {userInitials}
                             </div>
                         </div>
                     </header>
@@ -278,7 +311,8 @@ export default function Dashboard() {
                                     initial="hidden"
                                     animate="visible"
                                     whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                                    className="cursor-pointer"
+                                    className={product.external ? 'cursor-pointer' : 'cursor-default opacity-70'}
+                                    onClick={() => handleProductLaunch(product.id, product.external)}
                                 >
                                     <Card className="group relative h-full p-5 sm:p-6 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 overflow-hidden">
                                         {/* Gradient top bar */}
@@ -346,9 +380,9 @@ export default function Dashboard() {
                                         </div>
                                         <div className="flex items-center gap-3">
                                             <span className={`hidden sm:inline-block text-[10px] font-semibold uppercase px-2 py-0.5 rounded-full ${item.status === 'passed' ? 'bg-emerald-100 text-emerald-700'
-                                                    : item.status === 'pending' ? 'bg-amber-100 text-amber-700'
-                                                        : item.status === 'ready' ? 'bg-blue-100 text-blue-700'
-                                                            : 'bg-gray-100 text-gray-600'
+                                                : item.status === 'pending' ? 'bg-amber-100 text-amber-700'
+                                                    : item.status === 'ready' ? 'bg-blue-100 text-blue-700'
+                                                        : 'bg-gray-100 text-gray-600'
                                                 }`}>
                                                 {item.status}
                                             </span>

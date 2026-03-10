@@ -5,15 +5,19 @@ set -e
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
-NC='\033m' # No Color
+NC='\033[0m' # No Color
 
 # Configuration
-PROJECT_ID="kruit-487410"   # <-- replace with your GCP project ID
+PROJECT_ID="kruit-487410"
 REGION="us-central1"
 SERVICE_NAME="kruit-website"
 CONTACT_SERVICE_NAME="kruit-contact"
 
-echo -e "${GREEN}=== Kruit Frontend Deployment ===${NC}\n"
+# Names of resume-vetting services already deployed
+AUTH_SERVICE_NAME="auth-service"
+RESUME_VETTING_FRONTEND_SERVICE="frontend"
+
+echo -e "${GREEN}=== Kruit Website Deployment ===${NC}\n"
 
 # Set project
 echo -e "${YELLOW}Setting GCP project...${NC}"
@@ -40,7 +44,7 @@ else
 fi
 
 # Create service account for frontend runtime
-echo -e "\n${YELLOW}Creating service account for Kruit frontend runtime...${NC}"
+echo -e "\n${YELLOW}Creating service account for Kruit website runtime...${NC}"
 SERVICE_ACCOUNT_NAME="kruit-app-sa"
 SERVICE_ACCOUNT="${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
 
@@ -63,7 +67,29 @@ else
   echo -e "${GREEN}  ✓ Contact service URL: ${VITE_CLOUD_RUN_URL}${NC}"
 fi
 
-# Deploy Cloud Run service from source, injecting VITE_CLOUD_RUN_URL as a build arg
+# Fetch the auth-service URL (from resume-vetting project)
+echo -e "\n${YELLOW}Fetching ${AUTH_SERVICE_NAME} service URL...${NC}"
+VITE_AUTH_API_BASE_URL=$(gcloud run services describe ${AUTH_SERVICE_NAME} \
+  --region ${REGION} \
+  --format 'value(status.url)' 2>/dev/null || true)
+
+if [ -z "${VITE_AUTH_API_BASE_URL}" ]; then
+  echo -e "${RED}ERROR: Could not find '${AUTH_SERVICE_NAME}' Cloud Run service in ${REGION}.${NC}"
+  echo -e "${YELLOW}  → Deploy resume-vetting/auth-service first:${NC}"
+  echo -e "${YELLOW}      cd ../resume-vetting/auth-service && bash deploy.sh${NC}"
+  exit 1
+else
+  echo -e "${GREEN}  ✓ Auth service URL: ${VITE_AUTH_API_BASE_URL}${NC}"
+fi
+
+VITE_RESUME_VETTING_URL="https://resintel.kruit.ai/"
+
+# Build env vars string
+ENV_VARS="VITE_AUTH_API_BASE_URL=${VITE_AUTH_API_BASE_URL}"
+[ -n "${VITE_CLOUD_RUN_URL}" ] && ENV_VARS="${ENV_VARS},VITE_CLOUD_RUN_URL=${VITE_CLOUD_RUN_URL}"
+[ -n "${VITE_RESUME_VETTING_URL}" ] && ENV_VARS="${ENV_VARS},VITE_RESUME_VETTING_URL=${VITE_RESUME_VETTING_URL}"
+
+# Deploy Cloud Run service from source
 echo -e "\n${YELLOW}Deploying Cloud Run service from source...${NC}"
 gcloud run deploy ${SERVICE_NAME} \
   --source . \
@@ -77,7 +103,7 @@ gcloud run deploy ${SERVICE_NAME} \
   --cpu 1 \
   --timeout 60s \
   --port 8080 \
-  --set-env-vars "VITE_CLOUD_RUN_URL=${VITE_CLOUD_RUN_URL}"
+  --set-env-vars "${ENV_VARS}"
 
 # Get service URL
 echo -e "\n${YELLOW}Getting Cloud Run service URL...${NC}"
@@ -91,12 +117,12 @@ if [ -z "${SERVICE_URL}" ]; then
 fi
 
 echo -e "\n${GREEN}=== Deployment Complete ===${NC}\n"
-echo -e "Service:  ${GREEN}${SERVICE_NAME}${NC}"
-echo -e "Region:   ${GREEN}${REGION}${NC}"
-echo -e "URL:      ${GREEN}${SERVICE_URL}${NC}"
-
-[ -n "${VITE_CLOUD_RUN_URL}" ] && \
-  echo -e "Contact:  ${GREEN}${VITE_CLOUD_RUN_URL}${NC}"
+echo -e "Service:          ${GREEN}${SERVICE_NAME}${NC}"
+echo -e "Region:           ${GREEN}${REGION}${NC}"
+echo -e "URL:              ${GREEN}${SERVICE_URL}${NC}"
+echo -e "Auth API:         ${GREEN}${VITE_AUTH_API_BASE_URL}${NC}"
+[ -n "${VITE_RESUME_VETTING_URL}" ] && echo -e "Resume Vetting:   ${GREEN}${VITE_RESUME_VETTING_URL}${NC}"
+[ -n "${VITE_CLOUD_RUN_URL}" ] && echo -e "Contact service:  ${GREEN}${VITE_CLOUD_RUN_URL}${NC}"
 
 echo -e "\n${YELLOW}Open the app:${NC}"
 echo -e "  ${SERVICE_URL}"
