@@ -1,0 +1,6 @@
+# Never commit real credentials
+.env
+.env.local
+
+# Runtime artifacts
+node_modules/

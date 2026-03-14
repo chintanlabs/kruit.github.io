@@ -9,11 +9,13 @@ import {
     SheetTitle,
     SheetTrigger,
 } from '../components/ui/sheet';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navigation() {
     const [navBg, setNavBg] = useState('white');
     const [navText, setNavText] = useState('gray-600');
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
         e.preventDefault();
@@ -153,12 +155,14 @@ export default function Navigation() {
                         size={'xl'}
                         className={`hidden md:inline-flex transition-colors duration-500 ${navBg === 'primary' ? 'border-white text-white bg-transparent hover:text-white hover:bg-white/10' : 'border-gray-300 text-gray-700 hover:bg-gray-100'
                             }`}
+                        onClick={() => navigate('/login')}
                     >
-                        Book Demo
+                        Log In
                     </Button>
                     <Button
                         className={`text-sm sm:text-base ${navBg === 'primary' ? 'bg-white text-primary hover:bg-gray-100' : 'bg-primary text-white hover:bg-blue-700'}`}
                         size={'xl'}
+                        onClick={() => navigate('/signup')}
                     >
                         Get Started
                     </Button>
