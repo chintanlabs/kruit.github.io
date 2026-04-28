@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
 import { useEffect, useState } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, ChevronDown } from 'lucide-react';
 import {
     Sheet,
     SheetContent,
@@ -15,6 +15,7 @@ export default function Navigation() {
     const [navBg, setNavBg] = useState('white');
     const [navText, setNavText] = useState('gray-600');
     const [isOpen, setIsOpen] = useState(false);
+    const [isProductsOpen, setIsProductsOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
@@ -32,6 +33,18 @@ export default function Navigation() {
                 behavior: 'smooth'
             });
         }
+    };
+
+    const handleRecruiterSelect = () => {
+        setIsProductsOpen(false);
+        setIsOpen(false);
+        navigate('/?product=recruiter');
+    };
+
+    const handleInterviewerSelect = () => {
+        setIsProductsOpen(false);
+        setIsOpen(false);
+        navigate('/');
     };
 
     useEffect(() => {
@@ -62,14 +75,70 @@ export default function Navigation() {
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
-                <div
-                    className={`text-xl sm:text-2xl font-bold transition-colors duration-500 ${navBg === 'primary' ? 'text-white' : 'text-primary'
+                <button
+                    onClick={() => navigate('/')}
+                    className={`text-xl sm:text-2xl font-bold transition-colors duration-500 cursor-pointer ${navBg === 'primary' ? 'text-white' : 'text-primary'
                         }`}
                 >
                     <img src={`${import.meta.env.BASE_URL}logo.png`} alt="kruit.ai logo" className="h-7 sm:h-9 w-auto" />
-                </div>
+                </button>
 
                 <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+                    {/* Products Dropdown */}
+                    <div className="relative group">
+                        <button
+                            onClick={() => setIsProductsOpen(!isProductsOpen)}
+                            className={`text-sm transition-colors duration-500 flex items-center gap-1 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                                }`}
+                        >
+                            Products
+                            <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isProductsOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        {/* Dropdown Menu */}
+                        <div className={`absolute left-0 mt-3 w-85 rounded-2xl border border-slate-200 bg-white shadow-[0_24px_60px_-20px_rgba(15,23,42,0.22)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50 ${isProductsOpen ? 'opacity-100 visible translate-y-0' : ''}`}>
+                            <div className="p-2">
+                                <button
+                                    type="button"
+                                    onClick={handleRecruiterSelect}
+                                    className="group/item flex w-full items-center justify-between gap-4 rounded-xl px-4 py-4 text-left text-sm text-gray-700 hover:bg-slate-50 hover:shadow-sm transition-all"
+                                >
+                                    <div>
+                                        <div className="flex items-center gap-2">
+                                            <span className="font-semibold text-gray-900">AI Recruiter</span>
+                                            <span className="rounded-full bg-cyan-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-cyan-700 border border-cyan-200">
+                                                Beta
+                                            </span>
+                                        </div>
+                                        <p className="mt-1 text-xs text-gray-500 leading-relaxed">
+                                            Automate screening, outreach, and candidate evaluation.
+                                        </p>
+                                    </div>
+                                    <span className="inline-flex items-center rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-semibold text-primary opacity-0 translate-x-1 transition-all duration-200 group-hover/item:opacity-100 group-hover/item:translate-x-0">
+                                        Explore
+                                    </span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onClick={handleInterviewerSelect}
+                                    className="group/item flex w-full items-center justify-between gap-4 rounded-xl px-4 py-4 text-left text-sm text-gray-700 hover:bg-slate-50 hover:shadow-sm transition-all"
+                                >
+                                    <div>
+                                        <div className="flex items-center gap-2">
+                                            <span className="font-semibold text-gray-900">AI Interviewer</span>
+                                        </div>
+                                        <p className="mt-1 text-xs text-gray-500 leading-relaxed">
+                                            Run structured interviews with consistent scoring.
+                                        </p>
+                                    </div>
+                                    <span className="inline-flex items-center rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-semibold text-primary opacity-0 translate-x-1 transition-all duration-200 group-hover/item:opacity-100 group-hover/item:translate-x-0">
+                                        Explore
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <a
                         href="#problem"
                         onClick={(e) => handleNavClick(e, 'problem')}
@@ -78,6 +147,7 @@ export default function Navigation() {
                     >
                         Problem
                     </a>
+
                     <a
                         href="#solution"
                         onClick={(e) => handleNavClick(e, 'solution')}
@@ -86,15 +156,31 @@ export default function Navigation() {
                     >
                         Solution
                     </a>
+
                     <a
-                        href="#roi"
-                        onClick={(e) => handleNavClick(e, 'roi')}
+                        href="/pricing"
                         className={`text-sm transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                             }`}
                     >
-                        ROI
+                        Pricing
                     </a>
 
+                    <a
+                        href="/blog"
+                        className={`text-sm transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                            }`}
+                    >
+                        Blog
+                    </a>
+
+                    <a
+                        href="#about"
+                        onClick={(e) => handleNavClick(e, 'about')}
+                        className={`text-sm transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                            }`}
+                    >
+                        About
+                    </a>
                 </div>
 
                 <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
@@ -111,39 +197,115 @@ export default function Navigation() {
                                 <span className="sr-only">Toggle menu</span>
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="right" className="w-[300px] sm:w-[350px] px-4">
+                        <SheetContent side="right" className="w-75 sm:w-87.5 px-4">
                             <SheetHeader className='p-0 py-4'>
                                 <SheetTitle className="text-left text-primary text-xl font-bold">Navigation</SheetTitle>
                             </SheetHeader>
                             <div className="flex flex-col gap-6 mt-2">
+                                {/* Products Dropdown - Mobile */}
+                                <div>
+                                    <button
+                                        onClick={() => setIsProductsOpen(!isProductsOpen)}
+                                        className="text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100 w-full text-left flex items-center justify-between"
+                                    >
+                                        Products
+                                        <ChevronDown className={`h-4 w-4 transition-transform ${isProductsOpen ? 'rotate-180' : ''}`} />
+                                    </button>
+                                    {isProductsOpen && (
+                                        <div className="pl-4 mt-2 space-y-2">
+                                            <button
+                                                type="button"
+                                                onClick={handleRecruiterSelect}
+                                                className="flex w-full items-center justify-between gap-3 py-2 text-left text-gray-600 hover:text-primary transition-colors"
+                                            >
+                                                <span className="flex items-center gap-2">
+                                                    <span>AI Recruiter</span>
+                                                    <span className="rounded-full bg-cyan-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-cyan-700 border border-cyan-200">
+                                                        Beta
+                                                    </span>
+                                                </span>
+                                                <span className="text-xs font-semibold text-primary">Explore</span>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={handleInterviewerSelect}
+                                                className="flex w-full items-center justify-between gap-3 py-2 text-left text-gray-600 hover:text-primary transition-colors"
+                                            >
+                                                <span>AI Interviewer</span>
+                                                <span className="text-xs font-semibold text-primary">Explore</span>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+
                                 <a
                                     href="#problem"
-                                    onClick={(e) => handleNavClick(e, 'problem')}
+                                    onClick={(e) => {
+                                        handleNavClick(e, 'problem');
+                                        setIsOpen(false);
+                                    }}
                                     className="text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100"
                                 >
                                     Problem
                                 </a>
+
                                 <a
                                     href="#solution"
-                                    onClick={(e) => handleNavClick(e, 'solution')}
+                                    onClick={(e) => {
+                                        handleNavClick(e, 'solution');
+                                        setIsOpen(false);
+                                    }}
                                     className="text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100"
                                 >
                                     Solution
                                 </a>
+
                                 <a
-                                    href="#roi"
-                                    onClick={(e) => handleNavClick(e, 'roi')}
+                                    href="/pricing"
+                                    onClick={() => setIsOpen(false)}
                                     className="text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100"
                                 >
-                                    ROI
+                                    Pricing
+                                </a>
+                                <a
+                                    href="/blog"
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100"
+                                >
+                                    Blog
+                                </a>
+                                <a
+                                    href="#about"
+                                    onClick={(e) => {
+                                        handleNavClick(e, 'about');
+                                        setIsOpen(false);
+                                    }}
+                                    className="text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100"
+                                >
+                                    About
                                 </a>
 
                                 <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-gray-200">
-                                    <Button variant="outline" size="lg" className="w-full">
-                                        Book Demo
+                                    <Button
+                                        variant="outline"
+                                        size="lg"
+                                        className="w-full"
+                                        onClick={() => {
+                                            navigate('/login');
+                                            setIsOpen(false);
+                                        }}
+                                    >
+                                        Log In
                                     </Button>
-                                    <Button size="lg" className="w-full">
-                                        Get Started
+                                    <Button
+                                        size="lg"
+                                        className="w-full"
+                                        onClick={() => {
+                                            navigate('/signup');
+                                            setIsOpen(false);
+                                        }}
+                                    >
+                                        Book a demo
                                     </Button>
                                 </div>
                             </div>
@@ -164,7 +326,7 @@ export default function Navigation() {
                         size={'xl'}
                         onClick={() => navigate('/signup')}
                     >
-                        Get Started
+                        Book a demo
                     </Button>
                 </div>
             </div>
