@@ -17,8 +17,7 @@ export default function Hero() {
                     className="inline-block mb-4 sm:mb-6"
                 >
                     <span className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-blue-50 text-primary text-xs sm:text-sm font-medium">
-                        <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                        AI-Native Hiring Infrastructure
+                        AI-DRIVEN RECRUITMENT PLATFORM
                     </span>
                 </motion.div>
 
@@ -28,8 +27,9 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="text-[38px] sm:text-4xl md:text-5xl lg:text-[64px] font-extrabold text-gray-900 mb-4 sm:mb-6 leading-tight px-2"
                 >
-                    Hire engineers for <br className="hidden sm:block" />
-                    <span className="text-gray-900">judgment, not memorization</span>
+                    Hire smarter with <br className="hidden sm:block" />
+                    <span className="text-primary">autonomous AI</span><br />
+                    at every stage.
                 </motion.h1>
 
                 <motion.p
@@ -38,7 +38,7 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.6 }}
                     className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed px-2"
                 >
-                    An unique recruitment platofrm built for AI-first engineering teams. Evaluate real-world reasoning, reduce time-to-hire by 60%, and eliminate false positives.
+                    kruit.ai combines AI recruiting agents and AI-powered interviews to give you decision-ready candidates before a single human call.
                 </motion.p>
 
                 <motion.div
@@ -54,8 +54,8 @@ export default function Hero() {
                         whileTap={{ scale: 0.98 }}
                         className="w-full sm:w-auto"
                     >
-                        <Button size="xxl" className="flex items-center justify-center w-full sm:w-auto" onClick={() => navigate('/contact')}>
-                            Schedule a Demo
+                        <Button size="xxl" className="flex items-center justify-center w-full sm:w-auto" onClick={() => navigate('/?product=recruiter')}>
+                            Explore AI Recruiter
                             <motion.span
                                 className="ml-2 inline-flex"
                                 variants={{
@@ -78,7 +78,7 @@ export default function Hero() {
                                 <TooltipTrigger asChild>
                                     <div className="w-full sm:w-auto">
                                         <Button size="xxl" variant="primaryOutline" className="w-full sm:w-auto">
-                                            Structured Interviews
+                                            See All Products
                                         </Button>
                                     </div>
                                 </TooltipTrigger>

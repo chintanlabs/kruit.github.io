@@ -126,6 +126,9 @@ export default function Navigation() {
                                     <div>
                                         <div className="flex items-center gap-2">
                                             <span className="font-semibold text-gray-900">AI Interviewer</span>
+                                            <span className="rounded-full bg-slate-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200">
+                                                Coming Soon
+                                            </span>
                                         </div>
                                         <p className="mt-1 text-xs text-gray-500 leading-relaxed">
                                             Run structured interviews with consistent scoring.
@@ -231,7 +234,12 @@ export default function Navigation() {
                                                 onClick={handleInterviewerSelect}
                                                 className="flex w-full items-center justify-between gap-3 py-2 text-left text-gray-600 hover:text-primary transition-colors"
                                             >
-                                                <span>AI Interviewer</span>
+                                                <span className="flex items-center gap-2">
+                                                    <span>AI Interviewer</span>
+                                                    <span className="rounded-full bg-slate-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-500 border border-slate-200">
+                                                        Coming Soon
+                                                    </span>
+                                                </span>
                                                 <span className="text-xs font-semibold text-primary">Explore</span>
                                             </button>
                                         </div>
@@ -305,7 +313,7 @@ export default function Navigation() {
                                             setIsOpen(false);
                                         }}
                                     >
-                                        Book a demo
+                                        Get Started
                                     </Button>
                                 </div>
                             </div>
@@ -326,7 +334,7 @@ export default function Navigation() {
                         size={'xl'}
                         onClick={() => navigate('/signup')}
                     >
-                        Book a demo
+                        Get Started
                     </Button>
                 </div>
             </div>
