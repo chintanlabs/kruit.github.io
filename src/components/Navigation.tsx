@@ -44,7 +44,7 @@ export default function Navigation() {
     const handleInterviewerSelect = () => {
         setIsProductsOpen(false);
         setIsOpen(false);
-        navigate('/');
+        navigate('/?product=interviewer');
     };
 
     useEffect(() => {

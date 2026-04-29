@@ -18,6 +18,7 @@ import ContactUs from './pages/ContactUs';
 import Pricing from './pages/Pricing';
 import Blog from './pages/Blog';
 import RecruiterLanding from './components/RecruiterLanding';
+import InterviewerLanding from './components/InterviewerLanding';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { hydrateAuth, fetchCurrentUser } from './features/auth/authSlice';
 import { tokenStorage } from './services/auth.service';
@@ -25,12 +26,22 @@ import { tokenStorage } from './services/auth.service';
 function Home() {
     const location = useLocation();
     const isRecruiterView = new URLSearchParams(location.search).get('product') === 'recruiter';
+    const isInterviewerView = new URLSearchParams(location.search).get('product') === 'interviewer';
 
     if (isRecruiterView) {
         return (
             <div className="min-h-screen bg-white">
                 <Navigation />
                 <RecruiterLanding />
+            </div>
+        );
+    }
+
+    if (isInterviewerView) {
+        return (
+            <div className="min-h-screen bg-white">
+                <Navigation />
+                <InterviewerLanding />
             </div>
         );
     }

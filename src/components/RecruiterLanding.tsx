@@ -55,18 +55,7 @@ export default function RecruiterLanding() {
 
     return (
         <main className="bg-white">
-            <section className="relative overflow-hidden bg-linear-to-b from-gray-50 to-white text-slate-950">
-                <div
-                    className="absolute inset-0 opacity-25"
-                    style={{
-                        backgroundImage:
-                            'linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.06) 1px, transparent 1px)',
-                        backgroundSize: '32px 32px',
-                    }}
-                />
-                <div className="absolute -left-20 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-blue-200/70 blur-3xl" />
-                <div className="absolute -right-20 top-16 h-64 w-64 rounded-full bg-cyan-200/70 blur-3xl" />
-                <div className="absolute right-10 -bottom-28 h-96 w-96 rounded-full bg-blue-200/70 blur-3xl" />
+            <section className="hero bg-cover bg-center relative overflow-hidden bg-linear-to-b from-gray-50 to-white text-slate-950">
 
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-0">
                     <div className="max-w-4xl mx-auto pb-14 sm:pb-16 lg:pb-20 text-center">
@@ -119,21 +108,22 @@ export default function RecruiterLanding() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
-                        className="grid grid-cols-1 md:grid-cols-3 overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-sm"
+                        className="grid grid-cols-1 md:grid-cols-3 gap-4"
                     >
-                        {agentCards.map((item, index) => {
+                        {agentCards.map((item) => {
                             const Icon = item.icon;
                             return (
-                                <div
-                                    key={item.title}
-                                    className={`flex items-start gap-3 px-5 py-6 sm:px-6 sm:py-5 ${index < 2 ? 'border-b md:border-b-0 md:border-r border-blue-100' : ''}`}
-                                >
-                                    <Icon className="mt-1 h-5 w-5 text-primary" />
-                                    <div>
-                                        <h3 className="text-base sm:text-lg font-semibold text-slate-950">{item.title}</h3>
-                                        <p className="text-sm sm:text-base text-slate-600">{item.description}</p>
-                                    </div>
-                                </div>
+                                <Card key={item.title} className="rounded-2xl border border-blue-100 bg-white shadow-sm">
+                                    <CardContent className="px-5 py-6 sm:px-6 sm:py-5">
+                                        <div className="flex items-start gap-3">
+                                            <Icon className="mt-1 h-5 w-5 text-primary" />
+                                            <div>
+                                                <h3 className="text-base sm:text-lg font-semibold text-slate-950">{item.title}</h3>
+                                                <p className="text-sm sm:text-base text-slate-600">{item.description}</p>
+                                            </div>
+                                        </div>
+                                    </CardContent>
+                                </Card>
                             );
                         })}
                     </motion.div>
@@ -198,7 +188,7 @@ export default function RecruiterLanding() {
                                 AI-led technical and behavioural interviews. Coming soon.
                             </p>
                         </div>
-                        <Button size="xxl" className="bg-linear-to-r from-violet-600 to-cyan-500 text-white hover:from-violet-500 hover:to-cyan-400 w-full lg:w-auto">
+                        <Button size="xxl" className="bg-linear-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 w-full lg:w-auto">
                             Join waitlist
                             <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
