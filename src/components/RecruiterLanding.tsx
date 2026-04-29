@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Mail, Mic, MessageCircle, Search, Shuffle, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Mail, Mic, MessageCircle, Search, Shuffle, Bot } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
@@ -63,9 +63,9 @@ export default function RecruiterLanding() {
                             initial={{ opacity: 0, y: 12 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-primary"
+                            className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50/80 px-4 py-2 text-xs sm:text-sm font-semibold text-primary shadow-sm hover:-translate-y-0.5 hover:shadow-md hover:border-blue-300 hover:bg-white transition-all duration-300 cursor-default tracking-wide"
                         >
-                            <Sparkles className="h-3.5 w-3.5" />
+                            <Bot className="h-4 w-4" />
                             AI Recruiter - Live Now
                         </motion.span>
 
@@ -113,7 +113,7 @@ export default function RecruiterLanding() {
                         {agentCards.map((item) => {
                             const Icon = item.icon;
                             return (
-                                <Card key={item.title} className="rounded-2xl border border-blue-100 bg-white shadow-sm">
+                                <Card key={item.title} className="rounded-2xl border border-blue-100/60 bg-white/80 backdrop-blur-md shadow-sm hover:shadow-md transition-all duration-300">
                                     <CardContent className="px-5 py-6 sm:px-6 sm:py-5">
                                         <div className="flex items-start gap-3">
                                             <Icon className="mt-1 h-5 w-5 text-primary" />
@@ -130,7 +130,7 @@ export default function RecruiterLanding() {
                 </div>
             </section>
 
-            <section className="border-y border-blue-100 bg-white px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+            <section className="bg-white px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
                 <div className="mx-auto max-w-7xl">
                     <motion.div
                         initial={{ opacity: 0, y: 18 }}
@@ -178,7 +178,7 @@ export default function RecruiterLanding() {
 
             <section className="bg-slate-50 px-4 sm:px-6 lg:px-8 py-12 sm:py-14 border-t border-slate-200">
                 <div className="mx-auto max-w-7xl">
-                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 rounded-3xl bg-blue-50 px-5 py-6 sm:px-7 sm:py-7 border border-blue-100 shadow-sm text-center lg:text-left">
+                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 rounded-3xl bg-blue-50/60 backdrop-blur-md px-5 py-6 sm:px-7 sm:py-7 border border-blue-100/60 shadow-sm hover:shadow-md transition-all duration-300 text-center lg:text-left">
                         <div>
                             <p className="text-primary font-bold text-xs sm:text-sm tracking-[0.18em] uppercase">Coming Next</p>
                             <h3 className="mt-2 max-w-3xl text-xl sm:text-2xl lg:text-[1.8rem] font-bold text-slate-950 leading-tight">
@@ -188,7 +188,7 @@ export default function RecruiterLanding() {
                                 AI-led technical and behavioural interviews. Coming soon.
                             </p>
                         </div>
-                        <Button size="xxl" className="bg-linear-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 w-full lg:w-auto">
+                        <Button size="xxl" className="bg-primary text-white hover:bg-blue-700 w-full lg:w-auto" onClick={() => navigate('/?product=interviewer')}>
                             Join waitlist
                             <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>

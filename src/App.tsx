@@ -4,12 +4,8 @@ import { useDispatch } from 'react-redux';
 import type { AppDispatch } from './app/store';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import ProductsOverview from './components/ProductsOverview';
 import About from './components/About';
-import Problem from './components/Problem';
-import Solution from './components/Solution';
-import ROI from './components/ROI';
-import HowItWorks from './components/HowItWorks';
-import CTA from './components/CTA';
 import Footer from './components/Footer';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -50,12 +46,7 @@ function Home() {
         <div className="min-h-screen bg-white">
             <Navigation />
             <Hero />
-            <About />
-            <Problem />
-            <Solution />
-            <ROI />
-            <HowItWorks />
-            <CTA />
+            <ProductsOverview />
             <Footer />
         </div>
     );
@@ -82,6 +73,13 @@ export function App() {
                 <Route path="/contact" element={<ContactUs />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/about" element={
+                    <div className="min-h-screen bg-white">
+                        <Navigation />
+                        <About />
+                        <Footer />
+                    </div>
+                } />
 
                 {/* Protected routes */}
                 <Route path="/dashboard" element={

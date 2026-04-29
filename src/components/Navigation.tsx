@@ -18,22 +18,7 @@ export default function Navigation() {
     const [isProductsOpen, setIsProductsOpen] = useState(false);
     const navigate = useNavigate();
 
-    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
-        e.preventDefault();
-        setIsOpen(false);
 
-        const element = document.getElementById(sectionId);
-        if (element) {
-            const offset = 80; // Account for fixed nav height
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    };
 
     const handleRecruiterSelect = () => {
         setIsProductsOpen(false);
@@ -83,16 +68,16 @@ export default function Navigation() {
                     <img src={`${import.meta.env.BASE_URL}logo.png`} alt="kruit.ai logo" className="h-7 sm:h-9 w-auto" />
                 </button>
 
-                <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+                <div className="hidden lg:flex items-center justify-center gap-8 xl:gap-10 absolute left-1/2 -translate-x-1/2">
                     {/* Products Dropdown */}
                     <div className="relative group">
                         <button
                             onClick={() => setIsProductsOpen(!isProductsOpen)}
-                            className={`text-sm transition-colors duration-500 flex items-center gap-1 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                            className={`text-base font-medium transition-colors duration-500 flex items-center gap-1 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                                 }`}
                         >
                             Products
-                            <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isProductsOpen ? 'rotate-180' : ''}`} />
+                            <ChevronDown className={`h-4 w-4 transition-transform duration-300 group-hover:rotate-180 ${isProductsOpen ? 'rotate-180' : ''}`} />
                         </button>
                         {/* Dropdown Menu */}
                         <div className={`absolute left-0 mt-3 w-85 rounded-2xl border border-slate-200 bg-white shadow-[0_24px_60px_-20px_rgba(15,23,42,0.22)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50 ${isProductsOpen ? 'opacity-100 visible translate-y-0' : ''}`}>
@@ -142,27 +127,11 @@ export default function Navigation() {
                         </div>
                     </div>
 
-                    <a
-                        href="#problem"
-                        onClick={(e) => handleNavClick(e, 'problem')}
-                        className={`text-sm transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
-                            }`}
-                    >
-                        Problem
-                    </a>
 
-                    <a
-                        href="#solution"
-                        onClick={(e) => handleNavClick(e, 'solution')}
-                        className={`text-sm transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
-                            }`}
-                    >
-                        Solution
-                    </a>
 
                     <a
                         href="/pricing"
-                        className={`text-sm transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                        className={`text-base font-medium transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                             }`}
                     >
                         Pricing
@@ -170,16 +139,15 @@ export default function Navigation() {
 
                     <a
                         href="/blog"
-                        className={`text-sm transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                        className={`text-base font-medium transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                             }`}
                     >
                         Blog
                     </a>
 
                     <a
-                        href="#about"
-                        onClick={(e) => handleNavClick(e, 'about')}
-                        className={`text-sm transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                        href="/about"
+                        className={`text-base font-medium transition-colors duration-500 ${navText === 'white' ? 'text-white/90 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                             }`}
                     >
                         About
@@ -246,27 +214,7 @@ export default function Navigation() {
                                     )}
                                 </div>
 
-                                <a
-                                    href="#problem"
-                                    onClick={(e) => {
-                                        handleNavClick(e, 'problem');
-                                        setIsOpen(false);
-                                    }}
-                                    className="text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100"
-                                >
-                                    Problem
-                                </a>
 
-                                <a
-                                    href="#solution"
-                                    onClick={(e) => {
-                                        handleNavClick(e, 'solution');
-                                        setIsOpen(false);
-                                    }}
-                                    className="text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100"
-                                >
-                                    Solution
-                                </a>
 
                                 <a
                                     href="/pricing"
@@ -283,11 +231,8 @@ export default function Navigation() {
                                     Blog
                                 </a>
                                 <a
-                                    href="#about"
-                                    onClick={(e) => {
-                                        handleNavClick(e, 'about');
-                                        setIsOpen(false);
-                                    }}
+                                    href="/about"
+                                    onClick={() => setIsOpen(false)}
                                     className="text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100"
                                 >
                                     About

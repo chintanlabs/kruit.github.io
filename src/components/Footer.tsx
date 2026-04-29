@@ -1,59 +1,64 @@
 export default function Footer() {
     return (
-        <footer className="bg-[#0a0a0a] text-gray-400 py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+        <footer className="bg-[#0B1121] text-gray-400 py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
             <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row gap-4 md:gap-20">
-                    <div className="max-w-90">
-                        <div className="text-xl sm:text-2xl font-bold text-blue-500 mb-3 sm:mb-4">kruit.ai</div>
-                        <p className="text-sm sm:text-base text-gray-500 leading-relaxed">AI-native hiring infrastructure for engineering teams that move fast.</p>
+                <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-24">
+                    {/* Left Section */}
+                    <div className="max-w-xs">
+                        <div className="mb-6">
+                            <img 
+                                src={`${import.meta.env.BASE_URL}logo.png`} 
+                                alt="kruit.ai logo" 
+                                className="h-8 w-auto brightness-0 invert opacity-90" 
+                            />
+                        </div>
+                        <p className="text-sm text-gray-400 leading-relaxed mb-6">
+                            AI-driven, bias-aware candidate engagement and cross-role matching for modern recruiting teams.
+                        </p>
+                        <p className="text-sm text-gray-500">
+                            © 2026 kruit.ai · Beta · India
+                        </p>
                     </div>
-                    <div className="flex justify-between w-full md:max-w-[70%] py-4 flex-1">
+
+                    {/* Right Section (Links) */}
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 lg:gap-24">
                         <div>
-                            <h3 className="text-white font-bold mb-3 sm:mb-4 uppercase text-xs sm:text-sm tracking-wider">Product</h3>
-                            <ul className="space-y-2 sm:space-y-3">
+                            <h3 className="text-white font-semibold mb-4 sm:mb-6 uppercase text-xs tracking-wider">PRODUCTS</h3>
+                            <ul className="space-y-3 sm:space-y-4">
                                 <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
-                                        Features
+                                    <a href="/?product=recruiter" className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                                        AI Recruiter
+                                        <span className="px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 text-[10px] font-bold uppercase">Live</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
+                                    <a href="/?product=interviewer" className="text-sm text-gray-400 hover:text-white transition-colors">
+                                        AI Interviewer
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/pricing" className="text-sm text-gray-400 hover:text-white transition-colors">
                                         Pricing
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
-                                        Integrations
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
-                                        Security
                                     </a>
                                 </li>
                             </ul>
                         </div>
 
                         <div>
-                            <h3 className="text-white font-bold mb-3 sm:mb-4 uppercase text-xs sm:text-sm tracking-wider">Company</h3>
-                            <ul className="space-y-2 sm:space-y-3">
+                            <h3 className="text-white font-semibold mb-4 sm:mb-6 uppercase text-xs tracking-wider">COMPANY</h3>
+                            <ul className="space-y-3 sm:space-y-4">
                                 <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
+                                    <a href="/about" className="text-sm text-gray-400 hover:text-white transition-colors">
                                         About
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
-                                        Careers
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
+                                    <a href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors">
                                         Blog
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
+                                    <a href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">
                                         Contact
                                     </a>
                                 </li>
@@ -61,26 +66,21 @@ export default function Footer() {
                         </div>
 
                         <div>
-                            <h3 className="text-white font-bold mb-3 sm:mb-4 uppercase text-xs sm:text-sm tracking-wider">Resources</h3>
-                            <ul className="space-y-2 sm:space-y-3">
+                            <h3 className="text-white font-semibold mb-4 sm:mb-6 uppercase text-xs tracking-wider">LEGAL</h3>
+                            <ul className="space-y-3 sm:space-y-4">
                                 <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
-                                        Documentation
+                                    <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors">
+                                        Privacy policy
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
-                                        Case Studies
+                                    <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors">
+                                        Terms of service
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
-                                        Help Center
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="text-sm sm:text-base hover:text-white transition-colors">
-                                        API
+                                    <a href="mailto:sales@kruit.ai" className="text-sm text-gray-400 hover:text-white transition-colors">
+                                        sales@kruit.ai
                                     </a>
                                 </li>
                             </ul>
@@ -88,17 +88,21 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-gray-800 pt-6 sm:pt-8">
-                    <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <p className="text-gray-500 text-xs sm:text-sm text-center sm:text-left">© 2026 kruit.ai. All rights reserved.</p>
-                        <div className="flex gap-4 sm:gap-6">
-                            <a href="#" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
-                                Privacy Policy
-                            </a>
-                            <a href="#" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
-                                Terms of Service
-                            </a>
-                        </div>
+                {/* Bottom Bar */}
+                <div className="border-t border-slate-800/60 mt-12 sm:mt-16 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-gray-500 text-xs sm:text-sm text-center md:text-left">
+                        Beta · Available in India · Design partners only
+                    </p>
+                    <div className="flex gap-4 sm:gap-6">
+                        <a href="#" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
+                            Privacy
+                        </a>
+                        <a href="#" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
+                            Terms
+                        </a>
+                        <a href="mailto:sales@kruit.ai" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
+                            sales@kruit.ai
+                        </a>
                     </div>
                 </div>
             </div>

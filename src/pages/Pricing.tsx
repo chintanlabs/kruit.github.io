@@ -137,32 +137,41 @@ export default function Pricing() {
                     ))}
                 </div>
 
-                {/* Credit Usage Table */}
+                {/* Credit Usage Section */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
-                    className="mt-20"
+                    className="mt-24 sm:mt-32 max-w-4xl mx-auto"
                 >
-                    <h2 className="text-3xl font-bold text-gray-900 mb-6">Credit usage — what each action costs</h2>
-                    <div className="bg-blue-50 rounded-2xl overflow-hidden border border-blue-100">
-                        <div className="overflow-x-auto">
-                            <table className="w-full">
-                                <tbody>
-                                    {creditUsage.map((row, index) => (
-                                        <tr
-                                            key={index}
-                                            className={`border-b border-blue-100 hover:bg-blue-100/50 transition-colors ${
-                                                index === creditUsage.length - 1 ? 'border-b-0' : ''
-                                            }`}
-                                        >
-                                            <td className="px-6 py-4 text-sm font-medium text-gray-700">{row.action}</td>
-                                            <td className="px-6 py-4 text-sm text-right font-semibold text-gray-900">{row.cost}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                    <div className="text-center mb-10 sm:mb-12">
+                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-primary text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
+                            TRANSPARENT PRICING
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">Credit usage — what each action costs</h2>
+                    </div>
+
+                    <div className="bg-white rounded-3xl p-2 sm:p-3 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                        {creditUsage.map((row, index) => (
+                            <div
+                                key={index}
+                                className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:px-8 sm:py-6 rounded-2xl transition-all duration-300 ${
+                                    index !== creditUsage.length - 1 ? 'border-b border-slate-50' : ''
+                                } hover:bg-slate-50 hover:scale-[1.01] group`}
+                            >
+                                <span className="text-base sm:text-lg font-medium text-slate-700 group-hover:text-slate-900 transition-colors">
+                                    {row.action}
+                                </span>
+                                <span className={`w-fit text-sm sm:text-base font-bold px-4 py-1.5 rounded-full whitespace-nowrap transition-colors duration-300 ${
+                                    row.cost.includes('Free') 
+                                        ? 'bg-emerald-50 text-emerald-600 border border-emerald-100 group-hover:bg-emerald-100/50' 
+                                        : 'bg-blue-50 text-primary border border-blue-100 group-hover:bg-blue-100/50'
+                                }`}>
+                                    {row.cost}
+                                </span>
+                            </div>
+                        ))}
                     </div>
                 </motion.div>
             </div>
