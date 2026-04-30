@@ -83,7 +83,7 @@ else
 fi
 
 # Setting QA specific URL for Resume Vetting
-VITE_RESUME_VETTING_URL="https://qa.resintel.kruit.ai/"
+VITE_RESUME_VETTING_URL="https://resintel.viverekruit.ai/"
 
 # Build env vars string
 ENV_VARS="VITE_AUTH_API_BASE_URL=${VITE_AUTH_API_BASE_URL}"

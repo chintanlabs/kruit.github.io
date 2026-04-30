@@ -139,7 +139,7 @@ export default function Dashboard() {
             if (at && rt) {
                 // Strip any trailing slash before appending the hash
                 const base = config.resumeVettingUrl.replace(/\/$/, '');
-                const url = `${base}/#at=${encodeURIComponent(at)}&rt=${encodeURIComponent(rt)}`;
+                const url = `${base}/login#at=${encodeURIComponent(at)}&rt=${encodeURIComponent(rt)}`;
                 window.open(url, '_blank', 'noopener,noreferrer');
             }
         }

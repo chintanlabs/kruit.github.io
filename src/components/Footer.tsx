@@ -32,8 +32,9 @@ export default function Footer() {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/?product=interviewer" className="text-sm text-gray-400 hover:text-white transition-colors">
+                                    <a href="/?product=interviewer" className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
                                         AI Interviewer
+                                        <span className="px-1.5 py-0.5 rounded-full bg-yellow-500/20 text-yellow-500 text-[10px] font-bold uppercase whitespace-nowrap">Coming soon</span>
                                     </a>
                                 </li>
                                 <li>
@@ -79,8 +80,8 @@ export default function Footer() {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="mailto:sales@kruit.ai" className="text-sm text-gray-400 hover:text-white transition-colors">
-                                        sales@kruit.ai
+                                    <a href="mailto:hello@kruit.ai" className="text-sm text-gray-400 hover:text-white transition-colors">
+                                        hello@kruit.ai
                                     </a>
                                 </li>
                             </ul>
@@ -100,8 +101,8 @@ export default function Footer() {
                         <a href="#" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
                             Terms
                         </a>
-                        <a href="mailto:sales@kruit.ai" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
-                            sales@kruit.ai
+                        <a href="mailto:hello@kruit.ai" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
+                            hello@kruit.ai
                         </a>
                     </div>
                 </div>

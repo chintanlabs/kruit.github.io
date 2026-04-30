@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard';
 import ContactUs from './pages/ContactUs';
 import Pricing from './pages/Pricing';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import RecruiterLanding from './components/RecruiterLanding';
 import InterviewerLanding from './components/InterviewerLanding';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -73,6 +74,7 @@ export function App() {
                 <Route path="/contact" element={<ContactUs />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/about" element={
                     <div className="min-h-screen bg-white">
                         <Navigation />

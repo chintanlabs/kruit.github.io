@@ -58,7 +58,7 @@ export default function Pricing() {
         { action: 'Candidate scoring (resume + enrichment)', cost: '1 credit' },
         { action: 'Email sent (initial + follow-up)', cost: '1 credit' },
         { action: 'WhatsApp message sent', cost: '2 credits' },
-        { action: 'Voice call', cost: '4 credits / min' },
+        { action: 'Voice call', cost: '1 credit/min' },
         { action: 'Recruiter dashboard AI responses', cost: 'Free — no credits' },
     ];
 
