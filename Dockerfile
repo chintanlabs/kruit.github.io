@@ -25,7 +25,8 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copy and setup the entrypoint script for runtime env injection
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN sed -i 's/\r$//' /usr/local/bin/docker-entrypoint.sh && \
+    chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Cloud Run requires the container to listen on $PORT (default 8080)
 EXPOSE 8080
