@@ -8,7 +8,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 # Configuration
-PROJECT_ID="kruit-prod"
+PROJECT_ID="kruit-prod-500707"
 REGION="us-central1"
 SERVICE_NAME="kruit-website"
 CONTACT_SERVICE_NAME="kruit-contact"
