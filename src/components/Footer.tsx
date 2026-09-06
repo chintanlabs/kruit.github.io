@@ -70,12 +70,12 @@ export default function Footer() {
                             <h3 className="text-white font-semibold mb-4 sm:mb-6 uppercase text-xs tracking-wider">LEGAL</h3>
                             <ul className="space-y-3 sm:space-y-4">
                                 <li>
-                                    <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors">
+                                    <a href="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition-colors">
                                         Privacy policy
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors">
+                                    <a href="/terms-of-service" className="text-sm text-gray-400 hover:text-white transition-colors">
                                         Terms of service
                                     </a>
                                 </li>
@@ -95,10 +95,10 @@ export default function Footer() {
                         Beta · Available in India · Design partners only
                     </p>
                     <div className="flex gap-4 sm:gap-6">
-                        <a href="#" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
+                        <a href="/privacy-policy" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
                             Privacy
                         </a>
-                        <a href="#" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
+                        <a href="/terms-of-service" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">
                             Terms
                         </a>
                         <a href="mailto:hello@kruit.ai" className="text-gray-500 hover:text-white transition-colors text-xs sm:text-sm">

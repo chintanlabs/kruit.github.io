@@ -1,21 +1,36 @@
 import { motion } from 'framer-motion';
 import type { LucideIcon } from 'lucide-react';
 import {
+    AlertTriangle,
     ArrowRight,
+    Baby,
+    BookOpen,
+    Bot,
     CheckCircle2,
     Clock3,
+    Cookie,
+    Copyright,
+    CreditCard,
     Database,
     FileText,
     Fingerprint,
+    Gavel,
     Globe2,
+    Handshake,
+    History,
     LockKeyhole,
     Mail,
     MessageCircle,
+    Radio,
     Scale,
+    ScrollText,
+    Settings,
+    ShieldAlert,
     ShieldCheck,
     Sparkles,
     Trash2,
     UserCheck,
+    Users,
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import Footer from '../components/Footer';
@@ -48,63 +63,123 @@ const legalPages: Record<LegalPageKey, LegalPageContent> = {
         eyebrow: 'Privacy Policy',
         title: 'Privacy Policy',
         subtitle:
-            'How kruit.ai collects, uses, protects, and manages personal data across our recruiting platform, WhatsApp interactions, and customer workflows.',
-        effectiveDate: 'Effective May 25, 2026',
+            'How kruit.ai — operated by Chintanlabs Infotech Pvt. Ltd. — collects, uses, and protects personal data through the kruit.ai platform, for both Customers and Candidates.',
+        effectiveDate: 'Effective 25 May 2026 · Last updated 2 September 2026',
         primaryAction: 'Request privacy support',
         primaryHref: `mailto:${contactEmail}`,
         heroIcon: ShieldCheck,
         highlights: [
-            'We use data to provide recruiting automation, candidate engagement, support, and security.',
-            'We do not sell personal data.',
-            'Deletion and privacy requests can be sent to ops@kruit.ai.',
+            'kruit.ai processes Candidate data as a processor, acting on the Customer\'s instructions — the Customer is the data controller for Candidate data.',
+            'We do not sell personal data. Verified deletion requests are purged from active systems within 30 days and backups within 90 days.',
+            'Privacy questions, data deletion requests, or compliance matters: ops@kruit.ai.',
         ],
         sections: [
             {
-                title: 'Information we collect',
+                title: 'Our role: processor vs. controller',
+                icon: Scale,
+                body: [
+                    "kruit.ai processes Candidate data as a data processor, acting solely on the instructions of the Customer — the hiring organisation, GCC team, or recruiter that contracts to use the Platform. The Customer is the data controller for Candidate data and is responsible for the lawfulness of collecting and submitting it to the Platform, including obtaining Candidate consent.",
+                    'If you are a Candidate and have questions about how your data was submitted to us, please contact the hiring organisation directly — we can also help you get in touch with them.',
+                    'For data we collect directly from Customers and website visitors (e.g., account and billing information, website analytics), kruit.ai acts as the data controller.',
+                ],
+            },
+            {
+                title: 'Categories of data we process',
                 icon: Database,
                 body: [
-                    'We may collect account details, business contact information, candidate profile information, resumes, role requirements, communications, usage events, device data, and support messages.',
-                    'For WhatsApp-enabled workflows, we may process phone numbers, message content, delivery metadata, and interaction history needed to provide the requested service.',
+                    "On the Customer's behalf, the Platform processes: Identity data (name, contact details, phone number, email address); Professional data (resume content, employment history, skills, qualifications, GitHub/portfolio links); Preference data (salary expectations, notice period, remote/relocation preferences, work style signals); Enrichment data (publicly available information from GitHub, HuggingFace, and personal portfolios used to validate resume claims); and Interaction data (responses to WhatsApp, email, and voice outreach, and engagement signals).",
+                    'For Customers and Authorised Users, we collect account details, billing information, and usage data. For website visitors, we may collect standard analytics data (pages visited, browser type, referral source) via cookies.',
                 ],
             },
             {
-                title: 'How we use information',
+                title: 'How we use personal data',
                 icon: Sparkles,
                 body: [
-                    'We use personal data to operate kruit.ai, authenticate users, automate recruiter workflows, communicate with candidates, score and match candidates, provide customer support, prevent abuse, and improve reliability.',
-                    'We may also use aggregated or de-identified information for analytics, product quality, and service improvement.',
+                    'We use the categories above to parse, enrich, and cross-reference resumes and flag discrepancies as screening questions; generate the kruit Score — a multi-dimensional, AI-generated 0–100 suitability assessment against a specific job description; conduct AI-driven outreach via email, WhatsApp, and voice and record engagement signals; re-rank and re-evaluate historical candidates against new open roles (Candidate Rediscovery); and operate, secure, and improve the Platform, including administering Customer accounts and billing.',
+                    "The kruit Score is a decision-support tool only. It is not a final determination of a Candidate's suitability for employment, and Customers are contractually required to have a qualified human reviewer evaluate AI-generated outputs before any hiring decision is made or communicated.",
                 ],
             },
             {
-                title: 'Sharing and subprocessors',
-                icon: Globe2,
+                title: 'Consent and your choices as a Candidate',
+                icon: CheckCircle2,
                 body: [
-                    'We share data only as needed with trusted service providers that help us host, secure, analyze, and deliver the platform, including communication providers such as WhatsApp/Meta where the customer uses those channels.',
-                    'We may disclose information to comply with law, protect rights and safety, enforce agreements, or support a corporate transaction. We do not sell personal data.',
+                    'The Customer that submitted your data is responsible for obtaining your consent, informing you that AI-powered evaluation, scoring, and outreach will be conducted, and securing opt-in consent specifically for WhatsApp and voice outreach.',
+                    'You have the right to ask the Customer or kruit.ai what data of yours has been processed; opt out of automated communications at any time — opt-outs are honoured immediately and opted-out numbers/addresses are not re-contacted through the Platform; and request correction or deletion of your data.',
                 ],
             },
             {
-                title: 'Retention and deletion',
+                title: 'Explainability',
+                icon: FileText,
+                body: [
+                    'The Platform provides explainable outputs, including conflict resolution logs and score rationale, so that Customers can meet obligations to explain automated decisions under applicable law — including the EU AI Act, India\'s DPDP Act 2023, the UAE Federal Decree-Law No. 45 of 2021, the Saudi Personal Data Protection Law, and DIFC/ADGM data protection regulations.',
+                ],
+            },
+            {
+                title: 'Sharing and sub-processors',
+                icon: Users,
+                body: [
+                    'We do not sell personal data. We share data with sub-processors who help us run the Platform, including AWS, Google Cloud Platform, and WhatsApp Business API (Meta). A current list is available on request at ops@kruit.ai, and we will notify Customers of material changes with reasonable advance notice.',
+                    "We also share data with Meta for WhatsApp outreach, subject to Meta's Business Messaging Policy — we are not liable for message delivery failures, delays, or Meta's policy enforcement actions — and with law enforcement or regulators where required by law.",
+                ],
+            },
+            {
+                title: 'Data retention and deletion',
                 icon: Clock3,
                 body: [
-                    'We keep personal data only for as long as needed to provide the service, meet contractual obligations, comply with law, resolve disputes, and maintain security records.',
-                    `To request access, correction, export, or deletion, email ${contactEmail}. We aim to respond promptly and complete verified deletion requests within 30 days unless a longer period is legally required.`,
+                    "Candidate and Customer Data is retained for the duration of the active subscription plus 90 days. You (or the Customer, on your behalf) may request earlier deletion by contacting ops@kruit.ai.",
+                    "On a verified deletion request, we purge data from active systems within 30 days and from backups within 90 days. On termination of a Customer's subscription, the Customer may export its data within 30 days, after which it is deleted per this schedule.",
+                ],
+            },
+            {
+                title: 'Cookies and website analytics',
+                icon: Cookie,
+                body: [
+                    'Our website uses cookies and similar technologies to operate core functionality and understand aggregate usage. You can control cookies through your browser settings. Disabling non-essential cookies will not affect your ability to use core website features.',
+                ],
+            },
+            {
+                title: 'International data transfers',
+                icon: Globe2,
+                body: [
+                    'As a platform serving hiring teams across India and the GCC, personal data may be transferred to and processed in jurisdictions other than where you are located, including where our sub-processors operate.',
+                    'Where required by applicable law (GDPR, India\'s DPDP Act 2023, the UAE PDPL, the Saudi PDPL, or DIFC/ADGM regulations), we rely on appropriate safeguards and, where applicable, enter into a Data Processing Agreement with the Customer, available on request at ops@kruit.ai.',
                 ],
             },
             {
                 title: 'Security',
                 icon: LockKeyhole,
                 body: [
-                    'We use reasonable administrative, technical, and organizational safeguards designed to protect personal data from unauthorized access, loss, misuse, alteration, and disclosure.',
-                    'No internet service is perfectly secure, but we continuously work to improve platform security and limit access to people and systems that need it.',
+                    'We implement industry-standard technical and organisational measures to protect personal data, including encryption in transit and at rest, access controls, and regular security reviews.',
+                    'Suspected data incidents should be reported to ops@kruit.ai; we investigate and, where required, notify affected parties within 48 hours of confirming an incident.',
+                ],
+            },
+            {
+                title: 'Your rights',
+                icon: Fingerprint,
+                body: [
+                    'Depending on your jurisdiction, you may have the right to access, correct, delete, or restrict processing of your personal data, object to certain processing, or lodge a complaint with a supervisory authority.',
+                    'To exercise these rights, contact us at ops@kruit.ai; if you are a Candidate, we may direct your request to the relevant Customer where they are the controller of your data.',
+                ],
+            },
+            {
+                title: "Children's privacy",
+                icon: Baby,
+                body: [
+                    'The Platform is intended for use by working professionals and hiring organisations. It is not directed at, and we do not knowingly collect personal data from, individuals under the age of 18.',
+                ],
+            },
+            {
+                title: 'Changes to this policy',
+                icon: History,
+                body: [
+                    "We may update this Privacy Policy from time to time. Material changes will be posted at kruit.ai/privacy-policy with at least 30 days' notice where required. Continued use of the Platform after the effective date constitutes acceptance of the updated policy.",
                 ],
             },
             {
                 title: 'Contact',
                 icon: Mail,
                 body: [
-                    `For privacy questions, data subject requests, or Meta app review inquiries, contact us at ${contactEmail}.`,
-                    'If you interact with kruit.ai through an employer or recruiter, that organization may also be responsible for responding to certain requests about your data.',
+                    `For privacy questions, data deletion requests, or compliance matters, contact kruit.ai — Chintanlabs Infotech Pvt. Ltd. — at ${contactEmail} or via https://kruit.ai.`,
                 ],
             },
         ],
@@ -216,74 +291,148 @@ const legalPages: Record<LegalPageKey, LegalPageContent> = {
         ],
     },
     terms: {
-        eyebrow: 'Terms & Conditions',
-        title: 'Terms and Conditions',
+        eyebrow: 'Terms of Service',
+        title: 'Terms of Service',
         subtitle:
-            'The terms that govern access to and use of kruit.ai, including our website, recruiting platform, AI workflows, and communication channels.',
-        effectiveDate: 'Effective May 25, 2026',
+            'The binding agreement between kruit.ai — operated by Chintanlabs Infotech Pvt. Ltd. — and the Customer accessing or using the kruit.ai platform and services.',
+        effectiveDate: 'Effective 25 May 2026 · Last updated 2 September 2026',
         primaryAction: 'Contact operations',
-        primaryHref: `mailto:${contactEmail}?subject=Terms%20and%20Conditions%20Question`,
+        primaryHref: `mailto:${contactEmail}?subject=Terms%20of%20Service%20Question`,
         heroIcon: Scale,
         highlights: [
-            'Use kruit.ai only for lawful recruiting, candidate engagement, and business purposes.',
-            'Customers are responsible for the data, job requirements, and communications they submit.',
-            'Questions about these terms can be sent to ops@kruit.ai.',
+            'The Customer is solely responsible for obtaining Candidate consent — kruit.ai processes Candidate data only as a processor, on the Customer\'s instructions.',
+            'The kruit Score is a decision-support tool only; a qualified human reviewer must evaluate AI outputs before any hiring decision.',
+            'Governed by the laws of India, with disputes resolved by arbitration seated in Bengaluru, Karnataka.',
         ],
         sections: [
             {
-                title: 'Acceptance of terms',
-                icon: FileText,
+                title: 'Introduction and acceptance',
+                icon: BookOpen,
                 body: [
-                    'By accessing or using kruit.ai, you agree to these Terms and Conditions and any applicable order forms, product terms, or agreements between kruit.ai and your organization.',
-                    'If you use kruit.ai on behalf of a company or other organization, you represent that you are authorized to accept these terms for that organization.',
+                    'These Terms constitute a legally binding agreement between kruit.ai, operated by Chintanlabs Infotech Pvt. Ltd., and the Customer accessing or using the kruit.ai platform and services.',
+                    'By accessing the platform, signing an order form, or otherwise using our services, you confirm that you have read, understood, and agree to be bound by these Terms. If you are accepting on behalf of an organisation, you represent that you have authority to bind that organisation. If you do not agree to these Terms, you must not use the services.',
                 ],
             },
             {
-                title: 'Permitted use',
-                icon: CheckCircle2,
+                title: 'Definitions',
+                icon: ScrollText,
                 body: [
-                    'kruit.ai is provided for legitimate recruiting, hiring, candidate engagement, workflow automation, and related business operations.',
-                    'You may not misuse the service, attempt unauthorized access, interfere with platform security, scrape the service, reverse engineer restricted components, or use kruit.ai in violation of applicable law.',
+                    '"Platform" means the kruit.ai web application, APIs, AI agents, and associated tools. "Services" means all Platform features, including resume intelligence, candidate scoring, multi-channel outreach (email, WhatsApp, voice), ATS integration, and candidate rediscovery.',
+                    '"Customer" means the hiring organisation, GCC team, or recruiter that has contracted to use the Platform. "Candidate" means any individual whose data is submitted to or processed by the Platform by the Customer. "Customer Data" means all data uploaded or processed through the Platform by or on behalf of the Customer, including resumes, job descriptions, and candidate information.',
+                    '"kruit Score" means the AI-generated 0–100 suitability score assigned to Candidates relative to a specific job description. "Authorised Users" means employees or contractors of the Customer permitted to access the Platform.',
                 ],
             },
             {
-                title: 'Customer content and responsibility',
+                title: 'Description of services',
+                icon: Bot,
+                body: [
+                    'Core capabilities include Resume Intelligence (parsing, enrichment, and cross-referencing of resumes against GitHub, portfolios, and HuggingFace, with discrepancies flagged as screening questions); Role-Fit Matching (multi-dimensional scoring against a specific job description); Automated Outreach (AI-driven, personalised first-touch outreach via email, WhatsApp, and voice); Decision-Ready Profiles (kruit Score, conflict resolution log, intent signals, and suggested interview questions); Candidate Rediscovery (re-ranking historical ATS candidates against current open roles); and Orchestrated AI Agents (Evaluation, Outreach, and Rediscovery agents operating in an always-on loop).',
+                    'We aim to provide 99.5% uptime excluding scheduled maintenance, with reasonable advance notice of planned downtime. We do not guarantee uninterrupted or error-free operation and are not liable for outages caused by third-party services, including cloud providers, the WhatsApp Business API, or telephony providers.',
+                ],
+            },
+            {
+                title: 'Customer obligations and responsibilities',
+                icon: UserCheck,
+                body: [
+                    "Candidate consent is a critical Customer obligation. The Customer is solely responsible for obtaining all necessary consents before submitting Candidate data; informing Candidates that AI-powered evaluation, scoring, and outreach will be conducted; ensuring opt-in consent for WhatsApp and voice outreach; and providing Candidates a clear mechanism to opt out. kruit.ai processes Candidate data as a processor acting on the Customer's instructions — the Customer remains the data controller under applicable law.",
+                    'Customers must not use the Platform to contact individuals who have not consented or have opted out; apply discriminatory screening criteria based on protected characteristics; submit false or impersonated candidate data; circumvent rate limits or security controls; resell or sub-licence access without written consent; or use the Platform for any purpose other than legitimate recruitment.',
+                    'Customers are responsible for all actions taken by their Authorised Users, must not share credentials, and must notify kruit.ai promptly of any unauthorised access.',
+                ],
+            },
+            {
+                title: 'AI-generated outputs and human oversight',
+                icon: ShieldAlert,
+                body: [
+                    "The kruit Score (0–100) is a decision-support tool generated by AI models, reflecting the Platform's assessment at a point in time. It is not a final determination of a Candidate's suitability for employment.",
+                    'Customers must ensure a qualified human reviewer evaluates AI-generated outputs before making or communicating any hiring decision, rejection, or adverse employment action. kruit.ai does not make hiring decisions and is not liable for employment outcomes resulting from reliance on Platform outputs without adequate human review.',
+                    "AI-generated outputs may contain errors or reflect limitations in underlying data sources — the Customer is responsible for verifying material information before acting on them. The Platform provides explainable outputs, including conflict resolution logs and score rationale; Customers in jurisdictions requiring explanation of automated decisions (e.g., the EU AI Act, India's DPDP Act 2023, the UAE Federal Decree-Law No. 45 of 2021, the Saudi PDPL, or DIFC/ADGM regulations) are responsible for their own compliance obligations.",
+                ],
+            },
+            {
+                title: 'Data processing and privacy',
                 icon: Database,
                 body: [
-                    'Customers and users are responsible for the resumes, candidate data, job descriptions, messages, instructions, and other content they submit to kruit.ai.',
-                    'You are responsible for ensuring you have the rights, notices, permissions, and legal basis needed to process candidate or business data through the platform.',
+                    'The categories of data processed, retention, sub-processors, and security measures are set out in our Privacy Policy, which forms part of these Terms.',
+                    "Where required by applicable law (GDPR, India's DPDP Act 2023, the UAE Federal Decree-Law No. 45 of 2021, the Saudi PDPL, or DIFC/ADGM regulations), the parties will enter into a Data Processing Agreement. Our standard DPA is available on request at ops@kruit.ai.",
                 ],
             },
             {
-                title: 'AI-assisted outputs',
-                icon: Sparkles,
+                title: 'WhatsApp and multi-channel outreach',
+                icon: Radio,
                 body: [
-                    'kruit.ai may provide AI-generated summaries, scores, recommendations, message drafts, and workflow outputs. These outputs are intended to assist human review and decision-making.',
-                    'You are responsible for reviewing outputs before relying on them, sending them, or using them in employment-related decisions. kruit.ai does not replace independent human judgment.',
+                    "Outreach via WhatsApp is conducted through the Meta WhatsApp Business Platform and is subject to Meta's Business Messaging Policy. The Customer agrees to only initiate outreach to Candidates who have provided their number through a legitimate recruitment process and consented to WhatsApp contact; comply with message template approval requirements; honour opt-out requests immediately and not re-contact opted-out numbers; and not use outreach for marketing or non-recruitment communications.",
+                    "kruit.ai is not liable for message delivery failures, delays, or policy enforcement actions by Meta.",
                 ],
             },
             {
-                title: 'Accounts and security',
+                title: 'Intellectual property',
+                icon: Copyright,
+                body: [
+                    'All intellectual property rights in the Platform — including AI models, algorithms, scoring logic, software, and branding — remain the exclusive property of kruit.ai. These Terms do not grant the Customer any ownership interest in the Platform.',
+                    'The Customer retains all ownership rights in Customer Data and grants kruit.ai a limited, non-exclusive licence to process it solely to provide the Services. If the Customer provides feedback or suggestions, kruit.ai may use it without restriction or compensation.',
+                ],
+            },
+            {
+                title: 'Confidentiality',
                 icon: LockKeyhole,
                 body: [
-                    'You are responsible for keeping account credentials confidential and for activity that occurs under your account.',
-                    'Notify us promptly at ops@kruit.ai if you believe your account, workspace, or integration has been accessed without authorization.',
+                    "Each party agrees to keep confidential the other party's non-public business information disclosed in connection with these Terms. This does not apply to information that is publicly available, independently developed, or required to be disclosed by law. Confidentiality obligations survive termination for three (3) years.",
                 ],
             },
             {
-                title: 'Third-party services',
-                icon: Globe2,
+                title: 'Fees and payment',
+                icon: CreditCard,
                 body: [
-                    'kruit.ai may integrate with third-party services such as communication providers, cloud services, or customer-selected systems. Their own terms and policies may apply.',
-                    'We are not responsible for third-party services outside our control, but we work to use reputable providers and reasonable safeguards where they support the platform.',
+                    "Fees are as specified in the applicable order form or subscription agreement, exclusive of applicable taxes. Invoices are due within 30 days of issue unless otherwise agreed.",
+                    "We reserve the right to suspend Services for non-payment after 15 days' written notice. Fees are non-refundable except as expressly stated in the order form or required by law.",
                 ],
             },
             {
-                title: 'Changes, suspension, and contact',
+                title: 'Limitation of liability',
+                icon: AlertTriangle,
+                body: [
+                    'The Platform is provided "as is". To the maximum extent permitted by law, kruit.ai disclaims all warranties, express or implied, including fitness for a particular purpose, accuracy of AI outputs, and uninterrupted service.',
+                    "kruit.ai's total liability shall not exceed the fees paid by the Customer in the three (3) months preceding the claim. This cap does not apply to breach of confidentiality, kruit.ai's IP indemnification obligations, the Customer's indemnification obligations, or either party's fraud, gross negligence, or wilful misconduct. Where no fees have yet been paid (including during a trial), the cap for claims outside those exceptions is the greater of fees paid to date, the amount in the order form, or USD 5,000.",
+                    'kruit.ai is not liable for indirect, incidental, special, or consequential damages, nor for any hiring outcome, employment dispute, discrimination claim, or regulatory action arising from the Customer\'s use of Platform outputs in employment decisions.',
+                ],
+            },
+            {
+                title: 'Indemnification',
+                icon: Handshake,
+                body: [
+                    "The Customer agrees to indemnify kruit.ai from claims, losses, or expenses arising from the Customer's breach of these Terms, failure to obtain required Candidate consents, use of Platform outputs in violation of applicable law, or third-party claims relating to Customer Data submitted to the Platform.",
+                    'kruit.ai agrees to indemnify the Customer from third-party claims that the Platform, as provided and used in accordance with these Terms, infringes that party\'s intellectual property rights — excluding claims arising from Customer Data, unauthorised modification, or use combined with non-kruit.ai products. kruit.ai may, at its option, procure continued rights, replace or modify the Platform, or terminate the affected Services and refund unused prepaid fees.',
+                ],
+            },
+            {
+                title: 'Term and termination',
                 icon: Clock3,
                 body: [
-                    'We may update the service or these terms from time to time. Material updates will be reflected on this page or communicated through reasonable channels.',
-                    'We may suspend or restrict access when needed to protect the service, comply with law, prevent misuse, or address security concerns. For questions, contact ops@kruit.ai.',
+                    "These Terms commence on acceptance and continue for the subscription period in the order form, renewing automatically unless either party gives 30 days' written notice of non-renewal.",
+                    'Either party may terminate immediately on written notice if the other materially breaches these Terms and fails to remedy within 14 days, or becomes insolvent. On termination, Platform access ceases; the Customer may request a data export within 30 days, after which data is deleted per our Privacy Policy.',
+                ],
+            },
+            {
+                title: 'Governing law and dispute resolution',
+                icon: Gavel,
+                body: [
+                    'These Terms are governed by the laws of India. Disputes are first referred to good-faith negotiation; if unresolved within 30 days, they are submitted to binding arbitration under the Arbitration and Conciliation Act, 1996, seated in Bengaluru, Karnataka, India, conducted in English.',
+                    'Nothing in this clause prevents either party from seeking urgent injunctive relief from a court of competent jurisdiction.',
+                ],
+            },
+            {
+                title: 'General provisions',
+                icon: Settings,
+                body: [
+                    'These Terms, together with any order form and DPA, constitute the entire agreement between the parties. We may update these Terms by posting a revised version at kruit.ai/terms with at least 30 days\' notice for material changes; continued use after the effective date constitutes acceptance.',
+                    'If any provision is held invalid, the remaining provisions continue in force. Failure to enforce a provision is not a waiver of the right to enforce it later. Neither party is liable for delays caused by events beyond their reasonable control. The Customer may not assign these Terms without our prior written consent; we may assign them in connection with a merger or acquisition.',
+                ],
+            },
+            {
+                title: 'Contact',
+                icon: Mail,
+                body: [
+                    `For questions about these Terms or compliance matters, contact kruit.ai — Chintanlabs Infotech Pvt. Ltd. — at ${contactEmail} or via https://kruit.ai.`,
                 ],
             },
         ],
