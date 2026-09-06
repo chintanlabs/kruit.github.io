@@ -14,6 +14,7 @@ import ContactUs from './pages/ContactUs';
 import Pricing from './pages/Pricing';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import LegalPage from './pages/LegalPage';
 import RecruiterLanding from './components/RecruiterLanding';
 import InterviewerLanding from './components/InterviewerLanding';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -75,6 +76,8 @@ export function App() {
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
+                <Route path="/privacy-policy" element={<LegalPage page="privacy" />} />
+                <Route path="/terms-of-service" element={<LegalPage page="terms" />} />
                 <Route path="/about" element={
                     <div className="min-h-screen bg-white">
                         <Navigation />
